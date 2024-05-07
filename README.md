@@ -1,2 +1,3 @@
-# Zeni
-E-Learning application made using Microservice Architecture 
+#Zeni
+
+An E-Learning Web Platform
