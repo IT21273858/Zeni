@@ -33,7 +33,7 @@ const NavBar = () => {
             <span
               className={
                 links.link == pathname
-                  ? "text-xl text-purple-700 font-medium hover:underline underline-offset-4"
+                  ? "text-xl text-purple-700 font-bold underline underline-offset-4"
                   : "text-xl font-medium hover:underline underline-offset-4"
               }
             >
