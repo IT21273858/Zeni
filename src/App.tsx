@@ -1,11 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { AboutScreen, HomeScreen } from "./pages";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-red-600">
-        Hello world!
-      </h1>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<HomeScreen />} />
+          <Route path="/about" element={<AboutScreen />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
