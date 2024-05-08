@@ -22,7 +22,7 @@ const NavBar = () => {
   return (
     <div className=" w-full h-20 flex border-b border-purple-500 items-center justify-between">
       <div className=" ">
-        <div className=" flex text-purple-400">
+        <div className=" flex text-purple-500">
           <span className=" text-6xl font-Vign  ">ZE</span>
           <span className=" text-6xl font-Vign ">NI</span>
         </div>
@@ -33,7 +33,7 @@ const NavBar = () => {
             <span
               className={
                 links.link == pathname
-                  ? "text-xl text-purple-500 font-medium hover:underline underline-offset-4"
+                  ? "text-xl text-purple-700 font-medium hover:underline underline-offset-4"
                   : "text-xl font-medium hover:underline underline-offset-4"
               }
             >
