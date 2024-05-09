@@ -42,7 +42,7 @@ const NavBar = () => {
           </a>
         ))}
 
-        <a href={""}>
+        <a href={"/login"}>
           <PurpleBtn>LOGIN</PurpleBtn>
         </a>
       </div>

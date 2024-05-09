@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AboutScreen, CoursesScreen, HomeScreen } from "./pages";
+import { AboutScreen, CoursesScreen, HomeScreen, LoginScreen } from "./pages";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
           <Route index element={<HomeScreen />} />
           <Route path="/about" element={<AboutScreen />} />
           <Route path="/courses" element={<CoursesScreen />} />
+          <Route path="/login" element={<LoginScreen />} />
         </Routes>
       </BrowserRouter>
     </>
