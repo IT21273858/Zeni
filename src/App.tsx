@@ -4,8 +4,10 @@ import {
   AboutScreen,
   AllCourseScreen,
   CoursesScreen,
+  DashScreen,
   HomeScreen,
   LoginScreen,
+  MailConfirmationScreen,
 } from "./pages";
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Route path="/courses" element={<CoursesScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/home" element={<AllCourseScreen />} />
+          <Route path="/mail-confirm" element={<MailConfirmationScreen />} />
+          <Route path="/dashboard" element={<DashScreen />} />
         </Routes>
       </BrowserRouter>
     </>
