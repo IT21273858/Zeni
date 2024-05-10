@@ -1,6 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AboutScreen, CoursesScreen, HomeScreen, LoginScreen } from "./pages";
+import {
+  AboutScreen,
+  AllCourseScreen,
+  CoursesScreen,
+  HomeScreen,
+  LoginScreen,
+} from "./pages";
 
 function App() {
   return (
@@ -11,6 +17,7 @@ function App() {
           <Route path="/about" element={<AboutScreen />} />
           <Route path="/courses" element={<CoursesScreen />} />
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/home" element={<AllCourseScreen />} />
         </Routes>
       </BrowserRouter>
     </>
