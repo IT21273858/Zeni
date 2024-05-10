@@ -16,6 +16,7 @@ export default {
       'TT1': ['TT Drugs Trial', "sans-serif"],
       'TT2': ['TT Drugs Trl Cnd'," sans-serif"],
       'Vign': [ 'Vignettes', "sans-serif"],
+      'pop': ["Poppins", "sans-serif"],
                                                 
 
     },
