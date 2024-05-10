@@ -4,6 +4,7 @@ import {
   AboutScreen,
   AllCourseScreen,
   CoursesScreen,
+  CreateCourseScreen,
   DashScreen,
   HomeScreen,
   LoginScreen,
@@ -22,6 +23,7 @@ function App() {
           <Route path="/home" element={<AllCourseScreen />} />
           <Route path="/mail-confirm" element={<MailConfirmationScreen />} />
           <Route path="/dashboard" element={<DashScreen />} />
+          <Route path="/course/create" element={<CreateCourseScreen />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 
 const Dashboard = () => {
-  const [_user, _setUser] = useState("LEARNER");
+  const [_user, _setUser] = useState("INSTRACTOR");
   const dt = new Date();
   const day = ["MON", "TUE", "WED", "THUR", "FRI", "SAT", "SUN"];
   const mon = [
@@ -52,7 +52,7 @@ const Dashboard = () => {
         </div>
       </section>
       {/* Student */}
-      {
+      {_user == "LEARNER" && (
         <section className=" w-full h-3/6 grid gap-3  grid-cols-2 pt-7 place-items-center bg-purple-950">
           <DashCard title="IN-PROGRESS COURSES">
             <>
@@ -69,7 +69,7 @@ const Dashboard = () => {
             <CompletedCard />
           </DashCard>
         </section>
-      }
+      )}
 
       {/* Instructor */}
       {_user == "INSTRACTOR" && (
