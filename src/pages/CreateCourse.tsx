@@ -3,8 +3,10 @@ import { NavBar } from "../components";
 import Btn from "../components/Btn";
 import { FiPlus } from "react-icons/fi";
 import { Tooltip } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const CreateCourse = () => {
+  const to = useNavigate();
   return (
     <div className="flex w-screen h-screen pt-5 flex-col">
       <div className=" px-3">
@@ -59,10 +61,16 @@ const CreateCourse = () => {
               <input type="file" multiple={false} accept="image/*" />
             </section>
             <section className=" w-full flex gap-4 items-start flex-col ">
-              <Btn color="#3b0764" textcolor="#ffffff" hovercolor="#a855f7">
-                <FiPlus color="#ffffff" />
-                <span className=" text-xl ">Create Course</span>
-              </Btn>
+              <div
+                onClick={() => {
+                  to("/course/modules");
+                }}
+              >
+                <Btn color="#3b0764" textcolor="#ffffff" hovercolor="#a855f7">
+                  <FiPlus color="#ffffff" />
+                  <span className=" text-xl ">Create Course</span>
+                </Btn>
+              </div>
             </section>
           </section>
           <section className=" w-full col-span-2 font-pop font-medium text-white text-2xl flex items-center justify-center bg-purple-400">
