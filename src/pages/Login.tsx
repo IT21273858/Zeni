@@ -2,8 +2,45 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaIdCard } from "react-icons/fa";
 import { FiKey, FiMail, FiPhone, FiUser, FiUsers } from "react-icons/fi";
+import Swal from "sweetalert2";
+
+const ErrorPopup = () => {
+  Swal.fire({
+    icon: "error",
+    title: "Login Failed",
+    text: "Check the Login Credentials and Re-try",
+  });
+};
+
+const SucessSignup = () => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Signed in successfully",
+  });
+};
 
 const LoginComp = ({ click }: { click: any }) => {
+  const [email, _setemail] = useState<string | null>(null);
+  const [pass, _setpass] = useState<string | null>(null);
+
+  const handleLogin = () => {
+    if (!email || !pass) {
+      ErrorPopup();
+      return;
+    }
+  };
+
   return (
     <motion.div
       initial={{
@@ -17,37 +54,37 @@ const LoginComp = ({ click }: { click: any }) => {
       animate={
         click == "LOGIN"
           ? {
-            width: "100%",
-            height: "100%",
-            opacity: 1,
-            visibility: "visible",
-            borderRadius: "1rem",
-            transition: {
-              ease: "easeIn",
-              stiffness: {
-                type: "spring",
-                stiffness: 1,
+              width: "100%",
+              height: "100%",
+              opacity: 1,
+              visibility: "visible",
+              borderRadius: "1rem",
+              transition: {
+                ease: "easeIn",
+                stiffness: {
+                  type: "spring",
+                  stiffness: 1,
+                },
+                damping: 10,
+                duration: 0.5,
               },
-              damping: 10,
-              duration: 0.5,
-            },
-          }
+            }
           : {
-            width: "0%",
-            height: "100%",
-            opacity: 0,
-            visibility: "hidden",
-            borderRadius: "1rem",
-            transition: {
-              ease: "easeOut",
-              stiffness: {
-                type: "spring",
-                stiffness: 1,
+              width: "0%",
+              height: "100%",
+              opacity: 0,
+              visibility: "hidden",
+              borderRadius: "1rem",
+              transition: {
+                ease: "easeOut",
+                stiffness: {
+                  type: "spring",
+                  stiffness: 1,
+                },
+                damping: 10,
+                duration: 0.5,
               },
-              damping: 10,
-              duration: 0.5,
-            },
-          }
+            }
       }
     >
       <div className="flex w-full h-full flex-col">
@@ -56,16 +93,25 @@ const LoginComp = ({ click }: { click: any }) => {
         </section>
         <section className="w-full font-Gro mt-16 px-8 flex flex-col gap-7 justify-center items-center text-white ">
           <input
+            id="email"
             type="text"
-            placeholder="Username"
+            placeholder="email"
             className="bg-transparent border border-white rounded-md px-4 text-xl py-3 w-full"
+            onChange={(e) => {
+              _setemail(e.target.value);
+            }}
           />
           <input
+            id="password"
             type="password"
             placeholder="Password"
             className="bg-transparent border border-white rounded-md px-4 text-xl py-3 w-full"
+            onChange={(e) => {
+              _setpass(e.target.value);
+            }}
           />
           <input
+            onClick={handleLogin}
             type="button"
             value={"Login"}
             className="bg-purple-400 border border-white rounded-md px-4 text-2xl font-sans font-semibold py-3 w-3/5"
@@ -88,22 +134,24 @@ const RegComp = ({ click }: { click: any }) => {
     profile_img: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
-
-    if ((formData.fullname || formData.email || formData.password || formData.username) == null) {
+    if (
+      (formData.fullname ||
+        formData.email ||
+        formData.password ||
+        formData.username) == null
+    ) {
       // setErrors(newErrors);
       console.log("Error null");
-
     } else {
       // Submit the form
       console.log("Form submitted successfully", formData);
-
     }
   };
 
@@ -120,37 +168,37 @@ const RegComp = ({ click }: { click: any }) => {
       animate={
         click == "REG"
           ? {
-            width: "100%",
-            height: "100%",
-            opacity: 1,
-            visibility: "visible",
-            borderRadius: "1rem",
-            transition: {
-              ease: "easeIn",
-              stiffness: {
-                type: "spring",
-                stiffness: 1,
+              width: "100%",
+              height: "100%",
+              opacity: 1,
+              visibility: "visible",
+              borderRadius: "1rem",
+              transition: {
+                ease: "easeIn",
+                stiffness: {
+                  type: "spring",
+                  stiffness: 1,
+                },
+                damping: 10,
+                duration: 0.5,
               },
-              damping: 10,
-              duration: 0.5,
-            },
-          }
+            }
           : {
-            width: "0%",
-            height: "100%",
-            opacity: 0,
-            visibility: "hidden",
-            borderRadius: "1rem",
-            transition: {
-              ease: "easeOut",
-              stiffness: {
-                type: "spring",
-                stiffness: 1,
+              width: "0%",
+              height: "100%",
+              opacity: 0,
+              visibility: "hidden",
+              borderRadius: "1rem",
+              transition: {
+                ease: "easeOut",
+                stiffness: {
+                  type: "spring",
+                  stiffness: 1,
+                },
+                damping: 10,
+                duration: 0.5,
               },
-              damping: 10,
-              duration: 0.5,
-            },
-          }
+            }
       }
     >
       <div className="flex w-full h-full flex-col px-5">
@@ -220,16 +268,16 @@ const RegComp = ({ click }: { click: any }) => {
           </section>
         )}
         {displayForm && (
-
           <div className=" h-[400px]  overflow-scroll">
-
             <form
               onSubmit={handleSubmit}
               className="w-full mt-2 flex flex-col justify-start items-start text-2xl text-purple-900 overflow-y-scroll overflow-x-hidden"
             >
               <div className="flex w-full align-middle items-center gap-1">
                 <FiUser size={"1.3rem"} />
-                <label className="text-[#5e5c5c] font-serif text-[20px]">Full Name</label>
+                <label className="text-[#5e5c5c] font-serif text-[20px]">
+                  Full Name
+                </label>
               </div>
               <input
                 type="text"
@@ -243,7 +291,9 @@ const RegComp = ({ click }: { click: any }) => {
 
               <div className="flex w-full align-middle items-center gap-1 mt-2">
                 <FiMail size={"1.3rem"} />
-                <label className="text-[#5e5c5c] font-serif text-[20px]">Email</label>
+                <label className="text-[#5e5c5c] font-serif text-[20px]">
+                  Email
+                </label>
               </div>
               <input
                 type="email"
@@ -257,7 +307,9 @@ const RegComp = ({ click }: { click: any }) => {
 
               <div className="flex w-full align-middle items-center gap-1 mt-2">
                 <FiPhone size={"1.3rem"} />
-                <label className="text-[#5e5c5c] font-serif text-[20px]">Phone</label>
+                <label className="text-[#5e5c5c] font-serif text-[20px]">
+                  Phone
+                </label>
               </div>
               <input
                 type="number"
@@ -269,7 +321,9 @@ const RegComp = ({ click }: { click: any }) => {
               />
               <div className="flex w-full align-middle items-center gap-1 mt-2">
                 <FiKey size={"1.3rem"} />
-                <label className="text-[#5e5c5c] font-serif text-[20px]">Password</label>
+                <label className="text-[#5e5c5c] font-serif text-[20px]">
+                  Password
+                </label>
               </div>
               <input
                 type="password"
@@ -282,9 +336,9 @@ const RegComp = ({ click }: { click: any }) => {
               />
               <div className="flex w-full align-middle items-center gap-1 mt-2">
                 <FiUsers size={"1.3rem"} />
-                <label className="text-[#5e5c5c] font-serif text-[20px]">Username</label>
-
-
+                <label className="text-[#5e5c5c] font-serif text-[20px]">
+                  Username
+                </label>
               </div>
               <input
                 type="text"
@@ -297,7 +351,9 @@ const RegComp = ({ click }: { click: any }) => {
               />
               <div className="flex w-full align-middle items-center gap-1 mt-2">
                 <FaIdCard size={"1.3rem"} />
-                <label className="text-[#5e5c5c] font-serif text-[20px]">Profile Image</label>
+                <label className="text-[#5e5c5c] font-serif text-[20px]">
+                  Profile Image
+                </label>
               </div>
               <input
                 type="file"
@@ -308,10 +364,14 @@ const RegComp = ({ click }: { click: any }) => {
                 className="bg-transparent border border-white rounded-full px-4 text-xl py-3 "
               />
               <div className="flex justify-end px-5 w-full m-2">
-                <button type="submit" className="bg-purple-400 border border-white rounded-2xl px-4 text-2xl font-sans font-semibold py-2 ">Submit</button>
+                <button
+                  type="submit"
+                  className="bg-purple-400 border border-white rounded-2xl px-4 text-2xl font-sans font-semibold py-2 "
+                >
+                  Submit
+                </button>
               </div>
             </form>
-
           </div>
         )}
       </div>
