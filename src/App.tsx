@@ -27,7 +27,7 @@ function App() {
           <Route path="/dashboard" element={<DashScreen />} />
           <Route path="/course/create" element={<CreateCourseScreen />} />
           <Route path="/course/modules" element={<CreateModuleScreen />} />
-          <Route path="/course/view" element={<CourseView />} />
+          <Route path="/course/overview" element={<CourseView />} />
         </Routes>
       </BrowserRouter>
     </>
