@@ -15,6 +15,7 @@ import {
   MailConfirmationScreen,
 } from "./pages";
 import Lesson from "./pages/Lesson";
+import Quiz from "./pages/Quiz";
 
 function App() {
   return (
@@ -32,9 +33,10 @@ function App() {
           <Route path="/course/modules" element={<CreateModuleScreen />} />
           <Route path="/course/overview" element={<CourseOverView />} />
           <Route path="/course/view" element={<CourseView />} />
-
           <Route path="/Lesson" element={<Lesson />} />
           <Route path="/Assignment" element={<Assignment />} />
+          <Route path="/Quiz" element={<Quiz />} />
+
         </Routes>
       </BrowserRouter>
     </>

@@ -3,17 +3,17 @@ import { FiArrowLeft, FiShoppingBag } from "react-icons/fi";
 import Btn from "../components/Btn";
 import ReactPlayer from "react-player";
 
-const VideoPlayer = () => {
+const VideoPlayer = ({ title, url }: { title: string; url: string }) => {
   return (
     <>
       <div className=" w-full flex flex-col px-10 mt-8">
         <span className=" text-left text-xl font-pop font-semibold mb-5 flex gap-3 items-center">
           <FiShoppingBag size={"1.3rem"} />
-          Video of the Source Code
+          {title}
         </span>
         <ReactPlayer
           controls={true}
-          url={"https://youtu.be/41W7sRc5wps?si=6DfMn0BppPuJ0DfQ"}
+          url={url}
           fallback={<>Loading</>}
           height={720}
           width={1280}
@@ -22,16 +22,36 @@ const VideoPlayer = () => {
     </>
   );
 };
-const Documents = () => {
+const Documents = ({ title, link }: { title: string; link: string }) => {
   return (
     <>
       <div className=" w-full flex flex-col px-10 mt-8">
         <span className=" text-left text-xl font-pop font-semibold mb-5 flex gap-3 items-center">
           <FiShoppingBag size={"1.3rem"} />
-          Document title
+          {title}
         </span>
+        <div className=" w-52 h-44 bg-transparent rounded">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/182px-PDF_file_icon.svg.png"
+            className=" w-full h-full object-contain"
+          />
+        </div>
       </div>
-      <div className=""></div>
+    </>
+  );
+};
+const Images = ({ title, url }: { title: string; url: string }) => {
+  return (
+    <>
+      <div className=" w-full flex flex-col px-10 mt-8">
+        <span className=" text-left text-xl font-pop font-semibold mb-5 flex gap-3 items-center">
+          <FiShoppingBag size={"1.3rem"} />
+          {title}
+        </span>
+        <div className=" w-52 h-44 bg-purple-500 rounded">
+          <img src={url} className=" w-full h-full object-cover" />
+        </div>
+      </div>
     </>
   );
 };
@@ -74,8 +94,23 @@ const Lesson = () => {
         Study Materials
       </div>
       <div className=" w-full grid gap-6">
-        <Documents />
-        <VideoPlayer />
+        <div className=" w-4/5 grid grid-flow-col overflow-scroll">
+          <Documents title="Name of Doc" link="" />
+          <Images
+            url="https://fastly.picsum.photos/id/338/536/354.jpg?hmac=GM18LpV1PFucRDBp1wYO81AR70GZk0ZfdXYJ6I9B9a4"
+            title="Image came"
+          />
+          <Documents title="" link="" />
+          <Documents title="" link="" />
+          <Images
+            url="https://images.pexels.com/photos/10643964/pexels-photo-10643964.jpeg?auto=compress&cs=tinysrgb&w=600"
+            title="Frozen calkls"
+          />
+        </div>
+        <VideoPlayer
+          url="https://youtu.be/41W7sRc5wps?si=6DfMn0BppPuJ0DfQ"
+          title="Video of Lession 1"
+        />
       </div>
     </div>
   );
