@@ -1,21 +1,32 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useState } from "react";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
+import { ChangeEvent, useState } from "react";
 import { FiArrowLeft, FiLogOut, FiPlus } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 // import Swal from 'sweetalert2/dist/sweetalert2.js'
 // import 'sweetalert2/src/sweetalert2.scss'
 import Btn from "../components/Btn";
+import { ModuleCard, QuizCard, ResourceCard } from "../components";
 
 const CreateModule = () => {
   const to = useNavigate();
   const [cliked, setclicked] = useState(false);
-  const [modules, setModule] = useState(null);
-  const [moduletype, setModuleType] = useState<any>("Lesson");
+  const [modules, setModule] = useState("null");
+  const [moduletype, setModuleType] = useState<string | null>(null);
 
   // Swil
   const [resource, setResource] = useState<File | string | null>(null);
   const [resourcetype, setResourceType] = useState<any>(null);
+
+  const handleSelect = (e: SelectChangeEvent<string>) => {
+    setModuleType(e.target.value);
+  };
 
   const TopUp = () => {
     const Toast = Swal.mixin({
@@ -101,6 +112,23 @@ const CreateModule = () => {
     }
   };
 
+  const QuizPopup = async () => {
+    const { value: pop } = await Swal.fire({
+      title: "Create Quiz",
+      html: `
+      <div class={display:flex}>
+      <input type="text" id="question"/>
+      </div>
+      `,
+      preConfirm: () => {
+        return [document.getElementById("question")];
+      },
+    });
+
+    console.log("s");
+    console.log(pop);
+  };
+
   return (
     <div className=" flex w-screen h-screen   bg-purple-950  text-white overflow-hidden">
       <div className=" w-full h-full flex flex-col pt-5">
@@ -136,6 +164,24 @@ const CreateModule = () => {
             No Modules Avaiable
           </div>
         )}
+        {modules && (
+          <div className=" w-full h-full flex flex-col justify-center items-center py-8 ">
+            <div className=" w-11/12 h-full grid grid-cols-4 gap-4">
+              <ModuleCard />
+              <ModuleCard />
+              <ModuleCard />
+              <ModuleCard />
+              <ModuleCard />
+              <ModuleCard />
+              <ModuleCard />
+            </div>
+            <div className=" w-full h-11/12 flex justify-end px-10">
+              <div className=" text-lg font-semibold bg-purple-600 py-2 px-3 rounded cursor-pointer hover:bg-purple-800">
+                Complete Course Creation
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       {cliked && (
         <div className=" w-[520px] h-full bg-purple-900">
@@ -160,7 +206,7 @@ const CreateModule = () => {
             <textarea
               rows={5}
               placeholder="Module Discription"
-              className=" w-4/5 px-4 py-1 rounded-md bg-transparent border-2 border-white"
+              className=" w-4/5 px-4 py-1 rounded-md bg-transparent border-2 border-white resize-none"
             />
 
             <FormControl
@@ -180,7 +226,7 @@ const CreateModule = () => {
               </InputLabel>
               <Select
                 label="Age"
-                onChange={setModuleType}
+                onChange={handleSelect}
                 sx={{
                   color: "#ffffff",
                   borderColor: "#ffffff",
@@ -196,7 +242,7 @@ const CreateModule = () => {
               <>
                 <div className=" w-full h-full flex flex-col">
                   {moduletype == "Lesson" && (
-                    <div className=" w-full flex justify-end px-9">
+                    <div className=" w-full flex flex-col justify-end px-9">
                       <div
                         className=" text-base font-pop font-medium bg-purple-950 px-3 py-3 rounded-lg cursor-pointer hover:bg-purple-400"
                         data-swal-toast-template="#my-template"
@@ -206,11 +252,69 @@ const CreateModule = () => {
                       >
                         Add Resource
                       </div>
-                      <div className=""></div>
+                      <div className=" w-full mt-5 grid gap-y-3 h-52 overflow-scroll ">
+                        <ResourceCard />
+                        <ResourceCard />
+                        <ResourceCard />
+                      </div>
+                      <div
+                        className=" text-base font-pop font-medium bg-emerald-500 mt-10 px-3 py-3 rounded-lg cursor-pointer hover:bg-emerald-700"
+                        data-swal-toast-template="#my-template"
+                        onClick={() => {}}
+                      >
+                        ADD MODULE
+                      </div>
                     </div>
                   )}
-                  {moduletype == "Quiz" && <div className=""></div>}
-                  {moduletype == "Assignment" && <div className=""></div>}
+                  {moduletype == "Quiz" && (
+                    <div className="w-full flex flex-col justify-end px-9">
+                      <div
+                        className=" text-base font-pop font-medium bg-purple-950 px-3 py-3 rounded-lg cursor-pointer hover:bg-purple-400"
+                        data-swal-toast-template="#my-template"
+                        onClick={() => {
+                          QuizPopup();
+                        }}
+                      >
+                        Add Quiz
+                      </div>
+                      <div className=" w-full mt-5 grid gap-y-3 h-52 overflow-scroll ">
+                        <QuizCard />
+                        <QuizCard />
+                      </div>
+                      <div
+                        className=" text-base font-pop font-medium bg-emerald-500 mt-10 px-3 py-3 rounded-lg cursor-pointer hover:bg-emerald-700"
+                        data-swal-toast-template="#my-template"
+                        onClick={() => {}}
+                      >
+                        ADD MODULE
+                      </div>
+                    </div>
+                  )}
+                  {moduletype == "Assignment" && (
+                    <div className="w-full flex flex-col justify-end px-9">
+                      <div
+                        className=" text-base font-pop font-medium bg-purple-950 px-3 py-3 rounded-lg cursor-pointer hover:bg-purple-400"
+                        data-swal-toast-template="#my-template"
+                        onClick={() => {
+                          Popup();
+                        }}
+                      >
+                        Add Resource
+                      </div>
+                      <div className=" w-full mt-5 grid gap-y-3 h-52 overflow-scroll ">
+                        <ResourceCard />
+                        <ResourceCard />
+                        <ResourceCard />
+                      </div>
+                      <div
+                        className=" text-base font-pop font-medium bg-emerald-500 mt-10 px-3 py-3 rounded-lg cursor-pointer hover:bg-emerald-700"
+                        data-swal-toast-template="#my-template"
+                        onClick={() => {}}
+                      >
+                        ADD MODULE
+                      </div>
+                    </div>
+                  )}
                 </div>
               </>
             )}
