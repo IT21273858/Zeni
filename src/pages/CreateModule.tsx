@@ -113,20 +113,53 @@ const CreateModule = () => {
   };
 
   const QuizPopup = async () => {
-    const { value: pop } = await Swal.fire({
+    const { value: formValues } = await Swal.fire({
       title: "Create Quiz",
       html: `
-      <div class={display:flex}>
-      <input type="text" id="question"/>
-      </div>
+      <label style="text-align:left;">Question 1</label>
+        <input id="question" class="swal2-input">
+      <label>Answer A</label>
+      <input id="answerA" class="swal2-input">
+      <label>Answer B</label>
+      <input id="answerB" class="swal2-input">
+      <label>Answer C </label>
+      <input id="answerC" class="swal2-input">
+      <label>Answer D </label>
+      <input id="answerD" class="swal2-input">
+      <br>
+      <h1> Correct Answer </h1>
+      <label for="a">A</label>
+      <input type="radio" id="a" name="fav_language" value="A">
+      <label for="b">B</label>
+      <input type="radio" id="b" name="fav_language" value="B">
+      <label for="c">C</label>
+      <input type="radio" id="c" name="fav_language" value="C">
+      <label for="d">D</label>
+      <input type="radio" id="d" name="fav_language" value="D">
+      <br>
       `,
+      focusConfirm: false,
       preConfirm: () => {
-        return [document.getElementById("question")];
-      },
+        const selectedValue = document.querySelector('input[name="fav_language"]:checked').value;
+        const questionValue = document.getElementById("question").value;
+        const answerValueA = document.getElementById("answerA").value;
+        const answerValueB = document.getElementById("answerB").value;
+        const answerValueC = document.getElementById("answerC").value;
+        const answerValueD = document.getElementById("answerD").value;
+        return {
+          Question: questionValue,
+          A: answerValueA,
+          B: answerValueB,
+          C: answerValueC,
+          D: answerValueD,
+          Correct: selectedValue
+        };
+      }
     });
-
-    console.log("s");
-    console.log(pop);
+    if (formValues) {
+      console.log("hi", formValues);
+      Swal.fire('Created!', 'Your Quiz Saved!', 'success')
+    }
   };
 
   return (
@@ -260,7 +293,7 @@ const CreateModule = () => {
                       <div
                         className=" text-base font-pop font-medium bg-emerald-500 mt-10 px-3 py-3 rounded-lg cursor-pointer hover:bg-emerald-700"
                         data-swal-toast-template="#my-template"
-                        onClick={() => {}}
+                        onClick={() => { }}
                       >
                         ADD MODULE
                       </div>
@@ -284,7 +317,7 @@ const CreateModule = () => {
                       <div
                         className=" text-base font-pop font-medium bg-emerald-500 mt-10 px-3 py-3 rounded-lg cursor-pointer hover:bg-emerald-700"
                         data-swal-toast-template="#my-template"
-                        onClick={() => {}}
+                        onClick={() => { }}
                       >
                         ADD MODULE
                       </div>
@@ -309,7 +342,7 @@ const CreateModule = () => {
                       <div
                         className=" text-base font-pop font-medium bg-emerald-500 mt-10 px-3 py-3 rounded-lg cursor-pointer hover:bg-emerald-700"
                         data-swal-toast-template="#my-template"
-                        onClick={() => {}}
+                        onClick={() => { }}
                       >
                         ADD MODULE
                       </div>
