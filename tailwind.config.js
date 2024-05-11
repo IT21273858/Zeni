@@ -18,6 +18,7 @@ export default {
         'TT2': ['TT Drugs Trl Cnd'," sans-serif"],
         'Vign': [ 'Vignettes', "sans-serif"],
         'pop': ["Poppins", "sans-serif"],
+        'poet': ["Poetsen One", "sans-serif"],
                                                   
   
       },
