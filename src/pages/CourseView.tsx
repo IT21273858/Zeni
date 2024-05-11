@@ -1,14 +1,20 @@
 import React from "react";
 import { NavBar } from "../components";
 import NestedList from "../components/Dropdown";
-import Fab from '@mui/material/Fab';
-import NavigationIcon from '@mui/icons-material/Navigation';
+import CircularProgress, {
+
+} from '@mui/material/CircularProgress';
+import { Box, Checkbox, Typography } from "@mui/material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+// import Fab from '@mui/material/Fab';
+// import NavigationIcon from '@mui/icons-material/Navigation';
 // import { useNavigate } from "react-router-dom";
 
 
 const CourseView = () => {
     // const to = useNavigate();
-
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     return (
         <div className="flex w-screen h-screen pt-5 flex-col">
             <div className=" px-3">
@@ -26,8 +32,31 @@ const CourseView = () => {
                             <button className=" bg-[#9a61f6] hover:bg-purple-700 hover:rounded-3xl rounded-2xl py-1 px-3">Enroll Free</button>
                         </section> */}
                         <section className=" w-full flex gap-4 items-start flex-col ">
-                            <span className=" text-3xl line-clamp-1">Directory Services and Network Management
+                            <span className=" text-3xl">Directory Services and Network Management
                                 <span className="text-[15px] text-[#a4a1a1] align-middle"> ( Credit - 15 )</span>
+                                <span className="align-middle">
+                                    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+                                        <CircularProgress variant="determinate" value={15} />
+                                        <Box
+                                            sx={{
+                                                top: 0,
+                                                left: 0,
+                                                bottom: 0,
+                                                right: 0,
+                                                position: 'absolute',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            <Typography
+                                                variant="caption"
+                                                component="div"
+                                                color="white"
+                                            >{`${Math.round(15)}%`}</Typography>
+                                        </Box>
+                                    </Box>
+                                </span>
                             </span>
                         </section>
                         <section className=" w-full flex gap-5 items-start">
@@ -56,8 +85,9 @@ const CourseView = () => {
                 <div className=" w-full flex flex-col items-start px-10 mt-2 overflow-scroll">
                     <div className=" justify-start flex flex-col w-full">
                         <section className=" w-full flex gap-4 items-start flex-col ">
-                            <span className=" text-3xl font-serif text-violet-400">Introduction to Java
-                                {/* <span className="text-[15px] text-[#a4a1a1] align-middle"> ( Credit - 15 )</span> */}
+                            <span className="flex mt-2">
+                                <Checkbox {...label} icon={<CheckCircleOutlineIcon />} checkedIcon={<CheckCircleIcon />} />
+                                <span className=" text-3xl font-serif text-violet-400">Introduction to Java </span>
                             </span>
                         </section>
                         <section className=" w-full flex gap-5 items-start">
@@ -116,11 +146,11 @@ const CourseView = () => {
                     </div>
                 </div>
             </div>
-                <Fab variant="extended">
+            {/* <Fab variant="extended">
                     <NavigationIcon sx={{ mr: 1 }} />
                     Navigate
-                </Fab>
-                
+                </Fab> */}
+
         </div>
     );
 };
