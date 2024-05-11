@@ -95,9 +95,6 @@ const RegComp = ({ click }: { click: any }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation logic
-    const newErrors = {};
-
 
     if ((formData.fullname || formData.email || formData.password || formData.username) == null) {
       // setErrors(newErrors);
