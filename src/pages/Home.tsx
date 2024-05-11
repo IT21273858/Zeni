@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { NavBar, PurpleBtn } from "../components";
 import Btn from "../components/Btn";
 
 const Home = () => {
+  const to = useNavigate();
+
   return (
     <div className=" flex w-screen h-screen pt-5 px-3 flex-col">
       <NavBar />
@@ -13,7 +16,12 @@ const Home = () => {
             cooking, there's something for everyone. Expand your potential!
           </span>
           <div className=" w-full flex justify-end ">
-            <span className=" text-3xl  mt-10 w-3/5  font-pop">
+            <span
+              className=" text-3xl  mt-10 w-3/5  font-pop"
+              onClick={() => {
+                to("/login");
+              }}
+            >
               <Btn
                 textcolor={"#ffffff"}
                 color={"#3b0764"}
