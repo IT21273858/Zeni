@@ -1,12 +1,14 @@
 import React from "react";
 import { NavBar } from "../components";
 import NestedList from "../components/Dropdown";
-import Fab from '@mui/material/Fab';
-import NavigationIcon from '@mui/icons-material/Navigation';
+
+
 // import { useNavigate } from "react-router-dom";
 
 
-const CourseView = () => {
+
+
+const CourseOverView = () => {
     // const to = useNavigate();
 
     return (
@@ -22,9 +24,9 @@ const CourseView = () => {
                         </div>
                     </section>
                     <section className=" w-full flex gap-5 flex-col  items-start col-span-4 mt-5 font-pop font-medium text-white text-2xl px-8">
-                        {/* <section className="w-full flex gap-5 justify-end ">
+                        <section className="w-full flex gap-5 justify-end ">
                             <button className=" bg-[#9a61f6] hover:bg-purple-700 hover:rounded-3xl rounded-2xl py-1 px-3">Enroll Free</button>
-                        </section> */}
+                        </section>
                         <section className=" w-full flex gap-4 items-start flex-col ">
                             <span className=" text-3xl line-clamp-1">Directory Services and Network Management
                                 <span className="text-[15px] text-[#a4a1a1] align-middle"> ( Credit - 15 )</span>
@@ -116,13 +118,8 @@ const CourseView = () => {
                     </div>
                 </div>
             </div>
-                <Fab variant="extended">
-                    <NavigationIcon sx={{ mr: 1 }} />
-                    Navigate
-                </Fab>
-                
         </div>
     );
 };
 
-export default CourseView;
+export default CourseOverView;
