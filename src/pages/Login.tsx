@@ -172,7 +172,7 @@ const RegComp = ({ click }: { click: any }) => {
                   className="scale-150"
                   checked={_userType == "STUDENT"}
                 />
-                <section className="text-2xl font-body font-bold text-white px-9">
+                <section className="text-2xl font-pop font-bold text-white px-9">
                   STUDENT
                 </section>
               </span>
@@ -187,7 +187,7 @@ const RegComp = ({ click }: { click: any }) => {
                   className="scale-150"
                   checked={_userType == "INSTRUCTOR"}
                 />
-                <section className="text-2xl font-body font-bold text-white px-9">
+                <section className="text-2xl font-pop font-bold text-white px-9">
                   INSTRUCTOR
                 </section>
               </span>
@@ -202,7 +202,7 @@ const RegComp = ({ click }: { click: any }) => {
                   className="scale-150"
                   checked={_userType == "ADMIN"}
                 />
-                <section className="text-2xl font-body font-bold text-white px-9">
+                <section className="text-2xl font-pop font-bold text-white px-9">
                   ADMIN
                 </section>
               </span>
@@ -225,7 +225,7 @@ const RegComp = ({ click }: { click: any }) => {
 
             <form
               onSubmit={handleSubmit}
-              className="w-full mt-2 flex flex-col justify-start items-start text-2xl text-purple-900 overflow-scroll"
+              className="w-full mt-2 flex flex-col justify-start items-start text-2xl text-purple-900 overflow-y-scroll overflow-x-hidden"
             >
               <div className="flex w-full align-middle items-center gap-1">
                 <FiUser size={"1.3rem"} />
