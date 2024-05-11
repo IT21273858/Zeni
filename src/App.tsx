@@ -3,6 +3,7 @@ import "./App.css";
 import {
   AboutScreen,
   AllCourseScreen,
+  Assignment,
   CourseOverView,
   CourseView,
   CoursesScreen,
@@ -32,9 +33,10 @@ function App() {
           <Route path="/course/modules" element={<CreateModuleScreen />} />
           <Route path="/course/overview" element={<CourseOverView />} />
           <Route path="/course/view" element={<CourseView />} />
-
           <Route path="/Lesson" element={<Lesson />} />
+          <Route path="/Assignment" element={<Assignment />} />
           <Route path="/Quiz" element={<Quiz />} />
+
         </Routes>
       </BrowserRouter>
     </>
