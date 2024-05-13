@@ -36,7 +36,6 @@ function App() {
           <Route path="/Lesson" element={<Lesson />} />
           <Route path="/Assignment" element={<Assignment />} />
           <Route path="/Quiz" element={<Quiz />} />
-
         </Routes>
       </BrowserRouter>
     </>

@@ -1,20 +1,16 @@
-import {
-  Avatar,
-  LinearProgress,
-  linearProgressClasses,
-  Tooltip,
-} from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import { useState } from "react";
-import {
-  FiArrowLeftCircle,
-  FiArrowRightCircle,
-  FiEdit,
-  FiExternalLink,
-  FiTrash,
-  FiTrash2,
-} from "react-icons/fi";
+import { FiExternalLink } from "react-icons/fi";
 
-const FeedBackCard = () => {
+const FeedBackCard = ({
+  feed,
+  user,
+  user_pic,
+}: {
+  feed: string;
+  user: string;
+  user_pic: string;
+}) => {
   const [hover, setHover] = useState(false);
   const hoverhandle = () => {
     setHover(true);
@@ -29,15 +25,19 @@ const FeedBackCard = () => {
       className=" w-full h-16 border bg-white bg-opacity-15 border-purple-300 rounded-md flex cursor-pointer"
     >
       <section className=" w-1/5 h-full flex flex-col justify-start items-start px-3 hover:border rounded-md">
-        <Tooltip title={"instructor"}>
+        <Tooltip title={user}>
           <Avatar
             variant="rounded"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIugh4t8tGK9w3a52Q88li6yccJVy5o7USg&s"
+            src={
+              user_pic
+                ? user_pic
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIugh4t8tGK9w3a52Q88li6yccJVy5o7USg&s"
+            }
           />
         </Tooltip>
       </section>
       <section className=" w-full h-full flex flex-col justify-start items-start px-3 hover:border rounded-md line-clamp-1 text-lg font-pop font-light">
-        Feedback
+        {feed}
       </section>
       <section className=" w-1/5 h-full  rounded-md flex justify-center items-center">
         <div className="w-full h-full flex  hover:border justify-center items-center hover:bg-slate-400 rounded-xl hover:bg-opacity-30">

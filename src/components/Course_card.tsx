@@ -1,35 +1,49 @@
 import { Avatar, Chip, Tooltip } from "@mui/material";
 import { Badge } from "@radix-ui/themes";
 
-const Course_card = ({ thumb }: { thumb: string }) => {
+const Course_card = ({
+  thumb,
+  title,
+  fee,
+  i_name,
+  i_pic,
+}: {
+  thumb: string;
+  title: string;
+  fee: string;
+  i_name: string;
+  i_pic: string;
+}) => {
   return (
     <div className=" w-80 flex flex-col rounded-md drop-shadow-xl h-96 bg-purple-400 text-white">
       <div className="flex w-full  h-3/6">
         <img
-          className=" w-full relative h-full object-cover rounded-md"
+          className=" w-full flex h-full object-cover rounded-md"
           src={thumb}
         />
         <div className="absolute z-30 right-7 top-3">
-          <Chip
-            label="FREE"
-            className=" relative z-20 "
-            variant="filled"
-            style={{
-              color: "#9f1239",
-              backgroundColor: "#2dd4bf",
-              fontFamily: "Roboto",
-              fontWeight: 700,
-              fontStyle: "normal",
-              borderRadius: "10px",
-              padding: 0,
-            }}
-            clickable={false}
-          />
+          {fee == "Free" && (
+            <Chip
+              label="FREE"
+              className=" relative z-20 "
+              variant="filled"
+              style={{
+                color: "#9f1239",
+                backgroundColor: "#2dd4bf",
+                fontFamily: "Roboto",
+                fontWeight: 700,
+                fontStyle: "normal",
+                borderRadius: "10px",
+                padding: 0,
+              }}
+              clickable={false}
+            />
+          )}
         </div>
       </div>
       {/*  */}
       <span className=" text-left flex justify-start px-3  font-medium text-xl w-full">
-        Directory Services and Network Management
+        {title}
       </span>
       {/*  */}
       <div className=" w-full h-16 px-3 text-purple-950  grid grid-rows-2 ">
@@ -61,12 +75,16 @@ const Course_card = ({ thumb }: { thumb: string }) => {
           <Tooltip title="Instructor">
             <Avatar
               variant="rounded"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIugh4t8tGK9w3a52Q88li6yccJVy5o7USg&s"
+              src={
+                i_pic
+                  ? i_pic
+                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIugh4t8tGK9w3a52Q88li6yccJVy5o7USg&s"
+              }
             />
           </Tooltip>
         </span>
         <span className=" h-full items-end py-3 text-xl flex justify-center font-semibold font-TT1">
-          Asmitha Thiraviyam
+          {i_name}
         </span>
       </div>
     </div>

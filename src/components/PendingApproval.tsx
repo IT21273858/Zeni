@@ -1,21 +1,7 @@
-import {
-  Avatar,
-  LinearProgress,
-  linearProgressClasses,
-  Tooltip,
-} from "@mui/material";
 import { useState } from "react";
-import {
-  FiArrowLeftCircle,
-  FiArrowRightCircle,
-  FiEdit,
-  FiExternalLink,
-  FiTrash,
-  FiTrash2,
-} from "react-icons/fi";
 import Badge from "./Badge";
 
-const PendingApproval = () => {
+const PendingApproval = ({ title, id }: { title: string; id: string }) => {
   const [hover, setHover] = useState(false);
   const hoverhandle = () => {
     setHover(true);
@@ -31,7 +17,7 @@ const PendingApproval = () => {
     >
       <section className=" w-full h-full flex flex-col justify-start items-start px-3 hover:border rounded-md">
         <div className=" w-full flex flex-col justify-center items-start h-full text-2xl font-Gro line-clamp-1">
-          Directory Services and Network Management
+          {title}
         </div>
       </section>
       <section className=" w-2/5 h-full  rounded-md flex justify-center items-center">

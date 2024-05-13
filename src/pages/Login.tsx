@@ -1,7 +1,10 @@
+import { Email, RollerShades } from "@mui/icons-material";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaIdCard } from "react-icons/fa";
 import { FiKey, FiMail, FiPhone, FiUser, FiUsers } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ErrorPopup = () => {
@@ -9,6 +12,13 @@ const ErrorPopup = () => {
     icon: "error",
     title: "Login Failed",
     text: "Check the Login Credentials and Re-try",
+  });
+};
+const ErrorPopupSignup = (err: string) => {
+  Swal.fire({
+    icon: "error",
+    title: "Signup failed Failed",
+    text: "" + err,
   });
 };
 
@@ -33,12 +43,35 @@ const SucessSignup = () => {
 const LoginComp = ({ click }: { click: any }) => {
   const [email, _setemail] = useState<string | null>(null);
   const [pass, _setpass] = useState<string | null>(null);
+  const to = useNavigate();
 
   const handleLogin = () => {
     if (!email || !pass) {
       ErrorPopup();
       return;
     }
+
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_USER}/user/login`, {
+        email: email,
+        password: pass,
+      })
+      .then((value) => {
+        if (value.status == 200) {
+          SucessSignup();
+          const Data = value.data;
+          console.log(Data);
+          localStorage.setItem("TOKEN", Data.token);
+          localStorage.setItem("ROLE", Data.role);
+          localStorage.setItem("ID", Data.user.id);
+          localStorage.setItem("NAME", Data.user.name);
+          to("/dashboard");
+        }
+      })
+      .catch((err) => {
+        console.error("Error in Zeni\t:" + err);
+        ErrorPopup();
+      });
   };
 
   return (
@@ -114,7 +147,7 @@ const LoginComp = ({ click }: { click: any }) => {
             onClick={handleLogin}
             type="button"
             value={"Login"}
-            className="bg-purple-400 border border-white rounded-md px-4 text-2xl font-sans font-semibold py-3 w-3/5"
+            className="bg-purple-400 border cursor-pointer border-white rounded-md px-4 text-2xl font-sans font-semibold py-3 w-3/5"
           />
         </section>
       </div>
@@ -123,8 +156,9 @@ const LoginComp = ({ click }: { click: any }) => {
 };
 
 const RegComp = ({ click }: { click: any }) => {
-  const [_userType, _setUserType] = useState("STUDENT");
+  const [_userType, _setUserType] = useState("Learner");
   const [displayForm, setDisplayForm] = useState(false);
+  const to = useNavigate();
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -151,7 +185,36 @@ const RegComp = ({ click }: { click: any }) => {
       console.log("Error null");
     } else {
       // Submit the form
-      console.log("Form submitted successfully", formData);
+      const usertype = _userType;
+
+      const data = {
+        name: formData.username,
+        email: formData.email,
+        password: formData.password,
+        phoneNumber: formData.phone,
+        profile_img: formData.profile_img,
+        Role: usertype,
+        v_Status: false,
+      };
+
+      console.log("DD");
+      console.log(data);
+
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_USER}/user/create`, data)
+        .then((value) => {
+          const Data = value.data;
+          SucessSignup();
+          localStorage.setItem("TOKEN", Data.token);
+          localStorage.setItem("ROLE", Data.role);
+          localStorage.setItem("ID", Data.user.id);
+          localStorage.setItem("NAME", Data.user.name);
+          to("/dashboard");
+        })
+        .catch((err) => {
+          console.error("Error in User Creation" + err);
+          ErrorPopupSignup(err);
+        });
     }
   };
 
@@ -211,14 +274,14 @@ const RegComp = ({ click }: { click: any }) => {
             <section className="w-full mt-5 flex gap-5 justify-center">
               <span
                 onClick={() => {
-                  _setUserType("STUDENT");
+                  _setUserType("Learner");
                 }}
                 className="cursor-pointer rounded-md w-64 h-32 bg-purple-600 flex flex-col justify-center px-10 items-start py-6 gap-x-7 gap-y-2"
               >
                 <input
                   type="radio"
                   className="scale-150"
-                  checked={_userType == "STUDENT"}
+                  checked={_userType == "Learner"}
                 />
                 <section className="text-2xl font-pop font-bold text-white px-9">
                   STUDENT
@@ -226,14 +289,14 @@ const RegComp = ({ click }: { click: any }) => {
               </span>
               <span
                 onClick={() => {
-                  _setUserType("INSTRUCTOR");
+                  _setUserType("Instructor");
                 }}
                 className="cursor-pointer rounded-md w-64 h-32 bg-purple-600 flex flex-col justify-center px-10 items-start py-6 gap-x-7 gap-y-2"
               >
                 <input
                   type="radio"
                   className="scale-150"
-                  checked={_userType == "INSTRUCTOR"}
+                  checked={_userType == "Instructor"}
                 />
                 <section className="text-2xl font-pop font-bold text-white px-9">
                   INSTRUCTOR
@@ -241,14 +304,14 @@ const RegComp = ({ click }: { click: any }) => {
               </span>
               <span
                 onClick={() => {
-                  _setUserType("ADMIN");
+                  _setUserType("Admin");
                 }}
                 className="cursor-pointer rounded-md w-64 h-32 bg-purple-600 flex flex-col justify-center px-10 items-start py-6 gap-x-7 gap-y-2"
               >
                 <input
                   type="radio"
                   className="scale-150"
-                  checked={_userType == "ADMIN"}
+                  checked={_userType == "Admin"}
                 />
                 <section className="text-2xl font-pop font-bold text-white px-9">
                   ADMIN
