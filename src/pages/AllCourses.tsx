@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CourseCards, NavBar } from "../components";
+import axios from "axios";
 
 const AllCourses = () => {
+  const [_allCourses, _setAllCourses] = useState<any[] | null>(null);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_COURSE}/course/getAll`)
+      .then((result) => {
+        if (result.status == 200) {
+          console.log(result.data.data);
+          _setAllCourses(result.data.data);
+        }
+      })
+      .catch((err) => {
+        console.error("Error in Fetching Courses \t:" + err);
+      });
+  }, []);
+
   return (
     <div className="  w-screen h-screen pt-5 px-3 grid place-items-center">
       <NavBar />
@@ -17,23 +33,24 @@ const AllCourses = () => {
       </div>
 
       <div className=" w-full px-10 mb-5 grid grid-cols-4 mt-10 gap-y-5 place-items-center">
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
-        <CourseCards thumb="" />
+        {_allCourses && (
+          <>
+            {_allCourses.map((course, index) => (
+              <CourseCards
+                thumb={course.c_thumbnail}
+                key={index}
+                title={course.c_name}
+                fee={course.classification}
+                i_name={course.c_Instructor.name}
+                i_pic={
+                  course.c_Instructor.profile_img
+                    ? course.c_Instructor.profile_img
+                    : null
+                }
+              />
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

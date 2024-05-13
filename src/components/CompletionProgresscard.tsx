@@ -11,7 +11,17 @@ import {
   FiExternalLink,
 } from "react-icons/fi";
 
-const CompletionProgresscard = () => {
+const CompletionProgresscard = ({
+  progress,
+  title,
+  i_name,
+  i_src,
+}: {
+  progress: number;
+  title: string;
+  i_name: string;
+  i_src: string;
+}) => {
   const [hover, setHover] = useState(false);
   const hoverhandle = () => {
     setHover(true);
@@ -27,13 +37,13 @@ const CompletionProgresscard = () => {
     >
       <section className=" w-full h-full flex flex-col justify-start items-start px-3 hover:border rounded-md">
         <div className=" w-full flex justify-start items-center h-5/6 text-2xl font-Gro line-clamp-1">
-          Distruputed Systems
+          {title}
         </div>
         <div className=" w-full h-1/6 mb-2  ">
           <div>
             <LinearProgress
               variant="determinate"
-              value={50}
+              value={progress}
               sx={{
                 display: "flex",
                 height: "10px",
@@ -49,10 +59,14 @@ const CompletionProgresscard = () => {
         </div>
       </section>
       <section className=" w-1/5 h-full hover:border rounded-md flex justify-center items-center">
-        <Tooltip title={"instructor"}>
+        <Tooltip title={i_name}>
           <Avatar
             variant="rounded"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIugh4t8tGK9w3a52Q88li6yccJVy5o7USg&s"
+            src={
+              i_src
+                ? i_src
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIugh4t8tGK9w3a52Q88li6yccJVy5o7USg&s"
+            }
           />
         </Tooltip>
       </section>
