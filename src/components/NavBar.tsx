@@ -1,8 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import PurpleBtn from "./PurpleBtn";
-import getTokenData from "./AuthHandler";
-import NavDash from "./NavDash";
 import { Avatar } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
+import getTokenData from "./AuthHandler";
+import PurpleBtn from "./PurpleBtn";
 
 const NavBar = () => {
   const { pathname } = useLocation();

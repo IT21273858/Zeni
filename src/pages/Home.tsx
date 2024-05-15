@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { NavBar, PurpleBtn } from "../components";
-import Btn from "../components/Btn";
+import { NavBar } from "../components";
 import getTokenData from "../components/AuthHandler";
+import Btn from "../components/Btn";
 
 const Home = () => {
   const to = useNavigate();

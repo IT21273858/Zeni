@@ -1,7 +1,5 @@
-import React from "react";
-import { FiTrash } from "react-icons/fi";
-import Btn from "./Btn";
 import { Tooltip } from "@mui/material";
+import Btn from "./Btn";
 
 const ModuleCard = ({
   modname,

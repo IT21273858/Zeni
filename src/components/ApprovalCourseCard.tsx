@@ -1,18 +1,6 @@
-import {
-  Avatar,
-  LinearProgress,
-  linearProgressClasses,
-  Tooltip,
-} from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import { useState } from "react";
-import {
-  FiArrowLeftCircle,
-  FiArrowRightCircle,
-  FiEdit,
-  FiExternalLink,
-  FiTrash,
-  FiTrash2,
-} from "react-icons/fi";
+import { FiTrash } from "react-icons/fi";
 import Badge from "./Badge";
 
 const ApprovalCourseCard = () => {

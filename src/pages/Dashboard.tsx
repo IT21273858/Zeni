@@ -1,5 +1,8 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { FiPlusCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import RingLoader from "react-spinners/RingLoader";
 import {
   ApprovalCard,
   AuthHandler,
@@ -13,9 +16,6 @@ import {
   MyCourseCard,
   PendingApprovalCard,
 } from "../components";
-import axios from "axios";
-import RingLoader from "react-spinners/RingLoader";
-import { FiPlusCircle } from "react-icons/fi";
 
 const Dashboard = () => {
   const { NAME, ROLE, TOKEN, ID } = AuthHandler();

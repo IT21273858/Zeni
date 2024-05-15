@@ -5,20 +5,20 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FiArrowLeft, FiLogOut, FiPlus } from "react-icons/fi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 // import Swal from 'sweetalert2/dist/sweetalert2.js'
 // import 'sweetalert2/src/sweetalert2.scss'
-import Btn from "../components/Btn";
+import axios from "axios";
 import {
   ImageUploader,
   ModuleCard,
   QuizCard,
   ResourceCard,
 } from "../components";
-import axios from "axios";
+import Btn from "../components/Btn";
 
 const SavedResource = () => {
   const Toast = Swal.mixin({

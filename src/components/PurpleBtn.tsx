@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { ReactNode } from "react";
 
 const PurpleBtn = ({ children }: { children: ReactNode }) => {
   return (

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { CourseCards, NavBar } from "../components";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { CourseCards, NavBar } from "../components";
 
 const AllCourses = () => {
   const [_allCourses, _setAllCourses] = useState<any[] | null>(null);

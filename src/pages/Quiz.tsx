@@ -1,7 +1,6 @@
-import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import Btn from "../components/Btn";
 import { SingleQuiz } from "../components";
+import Btn from "../components/Btn";
 
 const Quiz = () => {
   return (

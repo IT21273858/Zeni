@@ -1,5 +1,4 @@
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React from "react";
+import { Radio, RadioGroup } from "@mui/material";
 
 const SingleQuiz = ({}: {
   Qnum: string;
