@@ -1,5 +1,4 @@
-import React, { ReactNode } from "react";
-import { InprogressCard } from ".";
+import { ReactNode } from "react";
 
 const DashCards = ({
   title,

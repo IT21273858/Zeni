@@ -1,7 +1,6 @@
-import React from "react";
 import { FiArrowLeft, FiShoppingBag } from "react-icons/fi";
-import Btn from "../components/Btn";
 import ReactPlayer from "react-player";
+import Btn from "../components/Btn";
 
 const VideoPlayer = ({ title, url }: { title: string; url: string }) => {
   return (

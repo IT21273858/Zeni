@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { ImageUploader, NavBar } from "../components";
-import Btn from "../components/Btn";
-import { FiPlus } from "react-icons/fi";
 import { Tooltip } from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
+import { FiPlus } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
-import axios from "axios";
 import Swal from "sweetalert2";
+import { ImageUploader, NavBar } from "../components";
+import Btn from "../components/Btn";
 
 const SucessCourseCreation = () => {
   const Toast = Swal.mixin({
