@@ -1,13 +1,11 @@
-import { Email, RollerShades } from "@mui/icons-material";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaIdCard } from "react-icons/fa";
 import { FiKey, FiMail, FiPhone, FiUser, FiUsers } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { DNA } from "react-loader-spinner";
 import RiseLoader from "react-spinners/RiseLoader";
+import Swal from "sweetalert2";
 
 const ErrorPopupSignup = (err: string) => {
   Swal.fire({

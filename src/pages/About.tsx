@@ -1,6 +1,5 @@
-import React from "react";
-import { NavBar } from "../components";
 import { FiCheckCircle } from "react-icons/fi";
+import { NavBar } from "../components";
 
 const About = () => {
   return (

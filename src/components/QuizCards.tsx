@@ -1,5 +1,3 @@
-import React from "react";
-
 const QuizCards = () => {
   return (
     <div className=" w-full h-40 flex flex-col bg-purple-950 rounded-lg border-2 border-white">

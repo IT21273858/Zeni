@@ -1,5 +1,4 @@
 import { Avatar, Chip, Tooltip } from "@mui/material";
-import { Badge } from "@radix-ui/themes";
 import { useNavigate } from "react-router-dom";
 
 const Course_card = ({

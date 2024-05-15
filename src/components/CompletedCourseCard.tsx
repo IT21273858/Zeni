@@ -1,15 +1,6 @@
-import {
-  Avatar,
-  LinearProgress,
-  linearProgressClasses,
-  Tooltip,
-} from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import { useState } from "react";
-import {
-  FiArrowLeftCircle,
-  FiArrowRightCircle,
-  FiExternalLink,
-} from "react-icons/fi";
+import { FiExternalLink } from "react-icons/fi";
 
 const CompletedCourseCard = () => {
   const [hover, setHover] = useState(false);
