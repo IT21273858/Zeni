@@ -107,7 +107,7 @@ const Lesson = () => {
           />
         </div>
         <VideoPlayer
-          url="https://youtu.be/41W7sRc5wps?si=6DfMn0BppPuJ0DfQ"
+          url="https://youtu.be/gAkwW2tuIqE?si=d_SwET76g3vkERNa"
           title="Video of Lession 1"
         />
       </div>

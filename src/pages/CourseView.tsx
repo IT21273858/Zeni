@@ -4,7 +4,7 @@ import { Box, Checkbox, Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { NavBar } from "../components";
 import NestedList from "../components/Dropdown";
 // import Fab from '@mui/material/Fab';
@@ -125,9 +125,11 @@ const CourseView = () => {
                             icon={<CheckCircleOutlineIcon />}
                             checkedIcon={<CheckCircleIcon />}
                           />
-                          <span className=" text-3xl font-serif text-violet-400">
-                            {mod.m_name}
-                          </span>
+                          <Link to={"/Lesson"}>
+                            <span className=" text-3xl font-serif text-violet-400">
+                              {mod.m_name}
+                            </span>
+                          </Link>
                         </span>
                       </section>
                       <section className=" w-full flex gap-5 items-start">
