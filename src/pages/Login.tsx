@@ -6,14 +6,9 @@ import { FaIdCard } from "react-icons/fa";
 import { FiKey, FiMail, FiPhone, FiUser, FiUsers } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { DNA } from "react-loader-spinner";
+import RiseLoader from "react-spinners/RiseLoader";
 
-const ErrorPopup = () => {
-  Swal.fire({
-    icon: "error",
-    title: "Login Failed",
-    text: "Check the Login Credentials and Re-try",
-  });
-};
 const ErrorPopupSignup = (err: string) => {
   Swal.fire({
     icon: "error",
@@ -43,9 +38,20 @@ const SucessSignup = () => {
 const LoginComp = ({ click }: { click: any }) => {
   const [email, _setemail] = useState<string | null>(null);
   const [pass, _setpass] = useState<string | null>(null);
+  const [isLoading, _setIsLoading] = useState<boolean>(false);
   const to = useNavigate();
 
+  const ErrorPopup = () => {
+    _setIsLoading(false);
+    Swal.fire({
+      icon: "error",
+      title: "Login Failed",
+      text: "Check the Login Credentials and Re-try",
+    });
+  };
+
   const handleLogin = () => {
+    _setIsLoading(true);
     if (!email || !pass) {
       ErrorPopup();
       return;
@@ -58,6 +64,7 @@ const LoginComp = ({ click }: { click: any }) => {
       })
       .then((value) => {
         if (value.status == 200) {
+          _setIsLoading(false);
           SucessSignup();
           const Data = value.data;
           console.log(Data);
@@ -70,6 +77,7 @@ const LoginComp = ({ click }: { click: any }) => {
       })
       .catch((err) => {
         console.error("Error in Zeni\t:" + err);
+        _setIsLoading(false);
         ErrorPopup();
       });
   };
@@ -149,6 +157,8 @@ const LoginComp = ({ click }: { click: any }) => {
             value={"Login"}
             className="bg-purple-400 border cursor-pointer border-white rounded-md px-4 text-2xl font-sans font-semibold py-3 w-3/5"
           />
+
+          {isLoading && <RiseLoader color="#86efac" />}
         </section>
       </div>
     </motion.div>
@@ -204,15 +214,18 @@ const RegComp = ({ click }: { click: any }) => {
         .post(`${import.meta.env.VITE_BACKEND_USER}/user/create`, data)
         .then((value) => {
           const Data = value.data;
+          console.log(Data);
           SucessSignup();
-          localStorage.setItem("TOKEN", Data.token);
-          localStorage.setItem("ROLE", Data.role);
-          localStorage.setItem("ID", Data.user.id);
-          localStorage.setItem("NAME", Data.user.name);
+          localStorage.removeItem("TOKEN");
+          localStorage.removeItem("ROLE");
+          localStorage.removeItem("ID");
+          localStorage.removeItem("NAME");
           to("/dashboard");
         })
         .catch((err) => {
           console.error("Error in User Creation" + err);
+          if (err == "AxiosError: Request failed with status code 500")
+            err = "Email Already exist";
           ErrorPopupSignup(err);
         });
     }

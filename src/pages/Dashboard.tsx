@@ -14,6 +14,8 @@ import {
   PendingApprovalCard,
 } from "../components";
 import axios from "axios";
+import RingLoader from "react-spinners/RingLoader";
+import { FiPlusCircle } from "react-icons/fi";
 
 const Dashboard = () => {
   const { NAME, ROLE, TOKEN, ID } = AuthHandler();
@@ -22,6 +24,8 @@ const Dashboard = () => {
   const [_BigCount, _setBigCount] = useState(0);
   const [_Dashdata, _setDashdata] = useState<any[] | null>(null);
   const [_Feedbacks, _setFeedbacks] = useState<any[] | null>(null);
+  const [_AllCoursesNonApprove, _setAllCourses] = useState<any[] | null>(null);
+  const [_isLoading, _setIsLoading] = useState<boolean>(false);
   const dt = new Date();
   const day = ["MON", "TUE", "WED", "THUR", "FRI", "SAT", "SUN"];
   const mon = [
@@ -50,12 +54,17 @@ const Dashboard = () => {
   }, [TOKEN]);
 
   useEffect(() => {
+    _setIsLoading(true);
+
     if (ID) {
       if (ROLE == "Learner") {
         axios
           .get(`${import.meta.env.VITE_BACKEND_USER}/user/get/` + ID)
           .then((result) => {
-            if (result.status == 200) _setDashdata(result.data.user.enrollment);
+            if (result.status == 200) {
+              _setIsLoading(false);
+              _setDashdata(result.data.user.enrollment);
+            }
             //   const users: any[] = result.data.data;
             //   const user = users.filter((user) => {
             //     if (user.id == ID) return user;
@@ -63,6 +72,7 @@ const Dashboard = () => {
             //   _setDashdata(user[0]);
           })
           .catch((err) => {
+            _setIsLoading(false);
             console.error("Error in Getting DashError" + err);
           });
       }
@@ -75,8 +85,50 @@ const Dashboard = () => {
             }/instructor/course/get/` + ID
           )
           .then((result) => {
+            if (result.status == 200) {
+              console.log(result.data.data);
+              _setDashdata(result.data.data);
+            }
+          })
+          .catch((err) => {
+            console.error("Error in Getting DashError" + err);
+          });
+
+        axios
+          .get(
+            `${
+              import.meta.env.VITE_BACKEND_INSTRUCTOR
+            }/instructor/feedback/get/` + ID
+          )
+          .then((result) => {
+            if (result.status == 200) {
+              _setIsLoading(false);
+              console.log(result.data.data);
+              _setFeedbacks(result.data.data);
+            }
+            //   const users: any[] = result.data.data;
+            //   const user = users.filter((user) => {
+            //     if (user.id == ID) return user;
+            //   });
+            //   _setDashdata(user[0]);
+          })
+          .catch((err) => {
+            _setIsLoading(false);
+            console.error("Error in Getting DashError" + err);
+          });
+      }
+      if (ROLE == "Admin") {
+        console.log("ROLE" + ROLE);
+        axios
+          .get(`${import.meta.env.VITE_BACKEND_COURSE}/course/getAll`)
+          .then((result) => {
             if (result.status == 200) console.log(result.data.data);
-            _setDashdata(result.data.data);
+            const Courses: any[] = result.data.data;
+            const NonV = Courses.filter((course) => {
+              if (!course.visibility) return course;
+            });
+            _setAllCourses(NonV);
+
             //   const users: any[] = result.data.data;
             //   const user = users.filter((user) => {
             //     if (user.id == ID) return user;
@@ -96,6 +148,7 @@ const Dashboard = () => {
           .then((result) => {
             if (result.status == 200) console.log(result.data.data);
             _setFeedbacks(result.data.data);
+            _setIsLoading(false);
             //   const users: any[] = result.data.data;
             //   const user = users.filter((user) => {
             //     if (user.id == ID) return user;
@@ -104,6 +157,7 @@ const Dashboard = () => {
           })
           .catch((err) => {
             console.error("Error in Getting DashError" + err);
+            _setIsLoading(false);
           });
       }
     }
@@ -166,6 +220,17 @@ const Dashboard = () => {
           {_Dashdata && (
             <>
               <section className=" w-full h-3/6 grid gap-3  grid-cols-2 pt-7 place-items-center bg-purple-950">
+                <span className=" mb-5 col-span-2 w-full flex justify-end items-center px-10 h-10">
+                  <div
+                    onClick={() => {
+                      to("/course/create");
+                    }}
+                    className=" h-full flex text-white rounded-md cursor-pointer hover:bg-purple-700 bg-purple-800 gap-3 px-5 items-center text-xl font-semibold font-pop"
+                  >
+                    <FiPlusCircle color="#ffffff" />
+                    ADD COURSE
+                  </div>
+                </span>
                 <DashCard title="MY COURSES">
                   <>
                     {_Dashdata
@@ -254,6 +319,14 @@ const Dashboard = () => {
             <EnrollmentCard ctitle={"3"} count={""} />
           </DashCard>
         </section>
+      )}
+
+      {_isLoading && (
+        <>
+          <section className=" w-full h-3/6  flex justify-center items-center pt-7 place-items-center bg-purple-950">
+            <RingLoader color="#ffffff" size={100} />
+          </section>
+        </>
       )}
     </div>
   );
