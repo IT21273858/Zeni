@@ -86,6 +86,28 @@ const CreateModule = () => {
     console.log("One4");
   };
 
+  const FetchModules = () => {
+    axios
+      .get(
+        `${import.meta.env.VITE_BACKEND_COURSE}/course/get/` +
+          localStorage.getItem("CID")
+      )
+      .then((data) => {
+        if (data.status == 200) {
+          console.log("I'm fetching -modules");
+          console.log(data.data);
+          set_Modules(data.data.course.module);
+        }
+      })
+      .catch((err) => {
+        console.error("Featc course error \t" + err);
+      });
+  };
+
+  useEffect(() => {
+    FetchModules();
+  }, []);
+
   useEffect(() => {
     fetchResources();
   }, [_res_sav]);
@@ -359,18 +381,29 @@ const CreateModule = () => {
           </div>
         )}
         {modules && (
-          <div className=" w-full h-full flex flex-col justify-center items-center py-8 ">
+          <div className=" w-full h-full flex flex-col justify-center items-center py-8 overflow-scroll">
             <div className=" w-11/12 h-full grid grid-cols-4 gap-4">
-              {/* <ModuleCard />
-              <ModuleCard />
-              <ModuleCard />
-              <ModuleCard />
-              <ModuleCard />
-              <ModuleCard />
-              <ModuleCard /> */}
+              {_modules && (
+                <>
+                  {_modules.map((module, index) => (
+                    <ModuleCard
+                      key={index}
+                      modname={module.m_name}
+                      modDesc={module.m_description}
+                      modtype={module.m_type}
+                      r_count={module.resources.length}
+                    />
+                  ))}
+                </>
+              )}
             </div>
-            <div className=" w-full h-11/12 flex justify-end px-10">
-              <div className=" text-lg font-semibold bg-purple-600 py-2 px-3 rounded cursor-pointer hover:bg-purple-800">
+            <div className=" w-full h-11/12 flex justify-end px-10 absolute bottom-0 mb-10">
+              <div
+                onClick={() => {
+                  to("/dashboard");
+                }}
+                className=" text-lg font-semibold bg-purple-600 py-2 px-3 rounded cursor-pointer hover:bg-purple-800"
+              >
                 Complete Course Creation
               </div>
             </div>
