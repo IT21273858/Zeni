@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { CourseCards, FeedbackCard, NavBar } from "../components";
+import { Link } from "react-router-dom";
 
 const Courses = () => {
   return (
@@ -19,18 +20,20 @@ const Courses = () => {
         <CourseCards thumb="https://cdn.venngage.com/template/thumbnail/small/7f9f09c9-5b9f-49e0-a21e-2328a0d9be71.webp" />
       </div>
       <div className=" w-full h-fit flex justify-center items-center my-5">
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#7e22ce",
-            color: "#ffffff",
-            ":hover": {
-              backgroundColor: "#a855f7",
-            },
-          }}
-        >
-          Explore More
-        </Button>
+        <Link to={"/login"}>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#7e22ce",
+              color: "#ffffff",
+              ":hover": {
+                backgroundColor: "#a855f7",
+              },
+            }}
+          >
+            Explore More
+          </Button>
+        </Link>
       </div>
       <div className=" w-full h-fit flex flex-col justify-center items-center my-5">
         <span className=" text-5xl font-TT1 font-medium text-purple-900">
