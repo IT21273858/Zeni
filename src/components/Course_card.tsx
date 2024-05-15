@@ -1,5 +1,6 @@
 import { Avatar, Chip, Tooltip } from "@mui/material";
 import { Badge } from "@radix-ui/themes";
+import { useNavigate } from "react-router-dom";
 
 const Course_card = ({
   thumb,
@@ -7,15 +8,28 @@ const Course_card = ({
   fee,
   i_name,
   i_pic,
+  id,
 }: {
   thumb: string;
   title: string;
   fee: string;
   i_name: string;
   i_pic: string;
+  id: string;
 }) => {
+  const to = useNavigate();
+
   return (
-    <div className=" w-80 flex flex-col rounded-md drop-shadow-xl h-96 bg-purple-400 text-white">
+    <div
+      onClick={() => {
+        to("/course/view", {
+          state: {
+            cid: id,
+          },
+        });
+      }}
+      className=" cursor-pointer  w-80 flex flex-col rounded-md drop-shadow-xl h-96 bg-purple-400 text-white"
+    >
       <div className="flex w-full  h-3/6">
         <img
           className=" w-full flex h-full object-cover rounded-md"

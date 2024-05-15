@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CourseCards, NavBar } from "../components";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const AllCourses = () => {
   const [_allCourses, _setAllCourses] = useState<any[] | null>(null);
@@ -39,13 +40,12 @@ const AllCourses = () => {
               <CourseCards
                 thumb={course.c_thumbnail}
                 key={index}
+                id={course.id}
                 title={course.c_name}
                 fee={course.classification}
-                i_name={course.c_Instructor.name}
+                i_name={course.c_Instructor ? course.c_Instructor.name : ""}
                 i_pic={
-                  course.c_Instructor.profile_img
-                    ? course.c_Instructor.profile_img
-                    : null
+                  course.c_Instructor ? course.c_Instructor.profile_img : null
                 }
               />
             ))}
